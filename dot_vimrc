@@ -1,0 +1,198 @@
+" TonyChG Vimrc
+
+call plug#begin('~/.vim/plugged')
+
+" Theme
+Plug 'itchyny/lightline.vim'
+Plug 'miyakogi/seiya.vim'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug '~/.dotfiles/themes/mycolors', { 'as': 'mycolors' }
+
+" Code
+Plug 'pangloss/vim-javascript'
+Plug 'posva/vim-vue'
+Plug 'avakhov/vim-yaml'
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'nvie/vim-flake8'
+Plug 'puppetlabs/puppet-syntax-vim'
+
+" Searching
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'rking/ag.vim'
+
+" Editing
+Plug 'mattn/emmet-vim'
+Plug 'tomtom/tcomment_vim'
+Plug 'godlygeek/tabular'
+Plug 'tonychg/MagicTemplate'
+
+call plug#end()
+
+" General
+syntax on
+set encoding=UTF-8
+" Customize
+" colorscheme challenger_deep
+colorscheme mycolors
+
+" set shellcmdflag=-ic
+" set shell=bash\ -l
+
+let $BASH_ENV = "~/.bash_aliases"
+
+let $FZF_DEFAULT_COMMAND='ag -l
+            \ --ignore .git
+            \ --ignore venv
+            \ --ignore .svn
+            \ --ignore *.sw?
+            \ --hidden -g ""'
+
+highlight! WildMenu ctermfg=Yellow ctermbg=Black
+
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 2
+" let g:netrw_keepdir = 0
+
+" Indent
+set autoindent
+set smartindent
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set laststatus=2
+
+" Infos
+set nonumber           " disable line numbers
+" set showcmd          " show command in bottom bar
+set wildmenu           " visual autocomplete for command menu
+set timeout            " for mappings
+set timeoutlen=1000    " default value
+set ttimeout           " for key codes
+set ttimeoutlen=0      " unnoticeable small value
+set foldmethod=manual
+set norelativenumber
+set nocursorcolumn
+set nocursorline
+set synmaxcol=200
+
+" Smart search
+" set ignorecase
+set smartcase
+set backspace=2
+if exists('+colorcolumn')
+    set colorcolumn=80
+endif
+
+filetype plugin on
+filetype plugin indent on
+
+" KeyBindings
+let mapleader=","
+
+" Next & Previous Line
+nnoremap j gj
+nnoremap k gk
+nnoremap J )
+nnoremap K (
+nnoremap µ #
+" nnoremap <C-o> :tabp<CR>
+" nnoremap <C-p> :tabn<CR>
+
+" Visual mode in line and block mapings
+nnoremap    v   <C-V>
+nnoremap <C-V>     v
+vnoremap    v   <C-V>
+vnoremap <C-V>     v
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+vnoremap    y   "+y
+
+" Windows/Buffers
+nnoremap <C-e><C-h> :bp<CR>
+nnoremap <C-e><C-l> :bn<CR>
+nnoremap <C-q> :Rex<CR>
+
+" Yank
+vnoremap <C-c> "+y
+inoremap <C-v> <ESC>"+pA
+nnoremap <C-v> "+p
+nnoremap ++ "+y$
+nnoremap +0 0"+y$
+nnoremap +w "+yw
+nnoremap +d "+d$
+
+" Saving
+nnoremap <c-s> :w<CR>
+vnoremap <c-s> <Esc><c-s>gv
+inoremap <c-s> <Esc><c-s>
+" nnoremap <c-q> :qa<CR>
+nnoremap qq :bdelete<CR>
+nnoremap zz :st!<CR>
+
+xnoremap K ({
+xnoremap J })
+
+" Command aliases
+command! E Explore
+command! W w !sudo tee %
+cabbrev help tab help
+cabbrev h tab h
+cabbrev ag Ag
+
+" command! Buffers call fzf#run(fzf#wrap(
+"     \ {'source': map(range(1, bufnr('$')), 'bufname(v:val)')}))
+
+" Tabs & whitespace & non-breaking spaces visible
+" exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+" set list
+
+" Markdown table
+au FileType markdown vmap <Bar><Bar> :EasyAlign*<Bar><Enter>
+
+" FZF
+nnoremap <C-f> :FZF<CR>
+nnoremap <C-g> :!clear
+            \ && echo -e "$(git status -b --show-stash)"
+            \ && echo -e "---------------------------------------------------------------"
+            \ && echo -e "$(git branch -va --color=always)"
+            \ && echo -e "---------------------------------------------------------------"
+            \ && echo -e "$(git log --oneline --color=always --decorate=short -n 20)"
+            \ <CR>
+nnoremap <C-b> :Buffers<CR>
+
+" Unbind F1 help
+nmap q: :echo<CR>
+imap q: :echo<CR>
+nmap <F1> :echo<CR>
+imap <F1> <C-o>:echo<CR>
+
+" Plugins settings
+let g:seiya_auto_enable=1
+let g:user_emmet_leader_key='<C-d>'
+let g:tmux_navigator_save_on_switch = 2
+let g:lightline = { 'colorscheme': 'wombat'}
+let g:go_fmt_options = "-tabwidth=4"
+let vim_markdown_preview_github=1
+let vim_markdown_preview_browser='Google Chrome'
+
+fun! s:autoFlake8()
+    if &filetype == 'python'
+        call Flake8()
+    endif
+endfunction
+
+augroup vagrant
+    au!
+    au BufRead,BufNewFile Vagrantfile set filetype=ruby
+augroup END
+
+" autocmd InsertLeave * write
+" autocmd BufWritePost * call s:autoFlake8()
+au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType puppet setlocal ts=2 sts=2 sw=2 expandtab

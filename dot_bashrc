@@ -1,0 +1,95 @@
+# Export PATH
+export GOPATH=$HOME/Golang
+export KUBE_EDITOR="vim"
+
+export PATH=$PATH:$HOME/.npm/bin
+export PATH=$PATH:$HOME/.local/bin
+export PATH=$PATH:/usr/local/bin
+export PATH=$PATH:$GOPATH/bin
+
+# Fix Ctrl+s & Ctrl+r
+if ! [[ -z $TMUX ]]; then
+    stty -ixon
+fi
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+AVAILABLE_SHOPT=`shopt`
+# History
+export HISTCONTROL=ignoredups:erasedups
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+__vte_prompt_command() { true; }
+
+if [[ ${AVAILABLE_SHOPT} =~ histappend ]]; then
+    shopt -s histappend
+fi
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Simple Prompt
+PS1='\u@\h:\W\$ '
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+if [[ ${AVAILABLE_SHOPT} =~ checkwinsize ]]; then
+    shopt -s checkwinsize
+fi
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+# if [[ ${AVAILABLE_SHOPT} =~ globstar ]]; then
+#     shopt -s globstar
+# fi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color|*-256color) color_prompt=yes;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors \
+        && eval "$(dircolors -b ~/.dircolors)" \
+        || eval "$(dircolors -b)"
+
+    alias ls='ls --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Snippet to create new tmux session
+function tns {
+  tmux new-session -d -s $1 && [[ -n "$TMUX" ]] \
+    && tmux switch-client -t $1 \
+    || tmux attach
+}
+
+# Kubectl bash completion
+source <(kubectl completion bash)
+
+# Alias definitions.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
