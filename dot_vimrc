@@ -34,8 +34,8 @@ call plug#end()
 syntax on
 set encoding=UTF-8
 " Customize
-" colorscheme challenger_deep
-colorscheme mycolors
+colorscheme challenger_deep
+" colorscheme mycolors
 
 " set shellcmdflag=-ic
 " set shell=bash\ -l
@@ -82,6 +82,7 @@ set synmaxcol=200
 " set ignorecase
 set smartcase
 set backspace=2
+
 if exists('+colorcolumn')
     set colorcolumn=80
 endif

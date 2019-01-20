@@ -1,5 +1,5 @@
 # Export PATH
-export GOPATH=$HOME/Golang
+export GOPATH=$HOME/Sable/Golang
 export KUBE_EDITOR="vim"
 
 export PATH=$PATH:$HOME/.npm/bin
