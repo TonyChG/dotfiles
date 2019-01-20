@@ -84,6 +84,7 @@ unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
+        /* Argonaut colorscheme */
 	/* 8 normal colors */
 	"#232323", /* background */
 	"#FF000F", /* red */
