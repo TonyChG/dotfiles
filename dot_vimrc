@@ -15,6 +15,7 @@ Plug 'avakhov/vim-yaml'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvie/vim-flake8'
 Plug 'puppetlabs/puppet-syntax-vim'
+Plug 'Valloric/YouCompleteMe'
 
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }

@@ -11,6 +11,7 @@ alias l='ls -CF'
 if [[ -x `which nvim` ]]; then
     alias vim="nvim"
 fi
+
 alias v="vim"
 alias vt="vagrant"
 
