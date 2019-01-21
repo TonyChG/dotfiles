@@ -154,13 +154,6 @@ au FileType markdown vmap <Bar><Bar> :EasyAlign*<Bar><Enter>
 
 " FZF
 nnoremap <C-f> :FZF<CR>
-nnoremap <C-g> :!clear
-            \ && echo -e "$(git status -b --show-stash)"
-            \ && echo -e "---------------------------------------------------------------"
-            \ && echo -e "$(git branch -va --color=always)"
-            \ && echo -e "---------------------------------------------------------------"
-            \ && echo -e "$(git log --oneline --color=always --decorate=short -n 20)"
-            \ <CR>
 nnoremap <C-b> :Buffers<CR>
 
 " Unbind F1 help
