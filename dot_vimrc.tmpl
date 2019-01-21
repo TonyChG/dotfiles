@@ -21,7 +21,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
 
 " Editing
 Plug 'mattn/emmet-vim'
@@ -137,6 +137,13 @@ command! W w !sudo tee %
 cabbrev help tab help
 cabbrev h tab h
 
+let g:ackprg = 'ag --vimgrep --smart-case'
+
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+
 " command! Buffers call fzf#run(fzf#wrap(
 "     \ {'source': map(range(1, bufnr('$')), 'bufname(v:val)')}))
 
@@ -165,7 +172,9 @@ let g:lightline = { 'colorscheme': 'wombat'}
 let g:go_fmt_options = "-tabwidth=4"
 let vim_markdown_preview_github=1
 let vim_markdown_preview_browser='Google Chrome'
+{{- if eq .chezmoi.hostname "lethinkpad" }}
 let g:ycm_rust_src_path = '~/Documents/Clones/rust/src'
+{{- end}}
 
 fun! s:autoFlake8()
     if &filetype == 'python'
