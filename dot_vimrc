@@ -43,12 +43,7 @@ colorscheme challenger_deep
 
 let $BASH_ENV = "~/.bash_aliases"
 
-let $FZF_DEFAULT_COMMAND='ag -l
-            \ --ignore .git
-            \ --ignore venv
-            \ --ignore .svn
-            \ --ignore *.sw?
-            \ --hidden -g ""'
+let $FZF_DEFAULT_COMMAND='fd -t f -E venv -E target'
 
 highlight! WildMenu ctermfg=Yellow ctermbg=Black
 
