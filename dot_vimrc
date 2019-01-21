@@ -170,6 +170,7 @@ let g:lightline = { 'colorscheme': 'wombat'}
 let g:go_fmt_options = "-tabwidth=4"
 let vim_markdown_preview_github=1
 let vim_markdown_preview_browser='Google Chrome'
+let g:ycm_rust_src_path = '~/Documents/Clones/rust/src'
 
 fun! s:autoFlake8()
     if &filetype == 'python'

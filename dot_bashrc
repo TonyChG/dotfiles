@@ -1,11 +1,19 @@
-# Export PATH
+# Export $GOPATH
 export GOPATH=$HOME/Sable/Golang
-export KUBE_EDITOR="vim"
 
+# Set $EDITOR
+if [[ -x `which nvim` ]]; then
+    export EDITOR="nvim"
+else
+    export EDITOR="vim"
+fi
+
+# Export $PATH
 export PATH=$PATH:$HOME/.npm/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:$GOPATH/bin
+export KUBE_EDITOR="${EDITOR}"
 
 # Fix Ctrl+s & Ctrl+r
 if ! [[ -z $TMUX ]]; then
