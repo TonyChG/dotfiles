@@ -175,6 +175,10 @@ let vim_markdown_preview_browser='Google Chrome'
 {{- if eq .chezmoi.hostname "lethinkpad" }}
 let g:ycm_rust_src_path = '~/Documents/Clones/rust/src'
 {{- end}}
+{{- if eq .chezmoi.hostname "macos" }}
+" let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+{{- end}}
 
 fun! s:autoFlake8()
     if &filetype == 'python'
