@@ -1,5 +1,5 @@
 # Export $GOPATH
-export GOPATH=$HOME/Sable/Golang
+export GOPATH=$HOME/Sable/go
 
 # Set $EDITOR
 if [[ -x `which nvim` ]]; then
