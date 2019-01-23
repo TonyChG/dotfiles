@@ -12,6 +12,10 @@ set-option -g default-shell /bin/bash
 bind-key m copy-mode
 setw -g mode-keys vi
 
+# Tmux Copy/Paste
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-yank'
+
 # Reload tmux config
 bind r source-file ~/.tmux.conf
 unbind '"'
