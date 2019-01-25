@@ -84,6 +84,10 @@ function tns {
     || tmux attach
 }
 
+function fd-vim {
+    vim $(fd "$1")
+}
+
 # Kubectl bash completion
 source <(kubectl completion bash)
 

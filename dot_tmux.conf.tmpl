@@ -71,7 +71,8 @@ set -g status-right \
  | head -1 | awk '{printf(\"%%50s %%5s\", substr($2, 0, 50), $1)}') %%RAM\
  | #(ps -r -e -o pcpu,comm | tail -n +2 | head -1\
  | awk '{printf(\"%%50s %%5s\", substr($2, 0, 50), $1)}') %%CPU |"
-{{- else }}
+{{- end }}
+
 {{- if eq .chezmoi.osRelease.id "ubuntu" }}
 # Ubuntu 18.04
 set -g status-right \
@@ -89,7 +90,5 @@ set -g status-right \
  | #(ps -e -o pcpu,comm --sort pcpu | tail -1\
  | awk '{printf(\"%%30s %%5s\", substr($2, 0, 30), $1)}') %%CPU |"
 {{- end }} 
-{{- end }}
-
 
 run '~/.tmux/plugins/tpm/tpm'
