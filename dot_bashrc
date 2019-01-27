@@ -1,12 +1,8 @@
 # Export $GOPATH
-export GOPATH=$HOME/Sable/go
+export GOPATH=$HOME/Projects/go
 
 # Set $EDITOR
-if [[ -x `which nvim` ]]; then
-    export EDITOR="nvim"
-else
-    export EDITOR="vim"
-fi
+export EDITOR="vim"
 
 # Export $PATH
 export PATH=$PATH:$HOME/.npm/bin
@@ -88,8 +84,6 @@ function fd-vim {
     vim $(fd "$1")
 }
 
-# Kubectl bash completion
-source <(kubectl completion bash)
 
 # Alias definitions.
 if [ -f ~/.bash_aliases ]; then
