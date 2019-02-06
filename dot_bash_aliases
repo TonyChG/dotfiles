@@ -7,11 +7,6 @@ alias la='ls -A'
 alias lo='ls -ohg --full-time'
 alias l='ls -CF'
 
-# VIM or NVIM
-if [[ -x `which nvim` ]]; then
-    alias vim="nvim"
-fi
-
 alias v="vim"
 alias vt="vagrant"
 
