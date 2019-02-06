@@ -74,6 +74,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+bind '"\e[1;5D" backward-word' 
+bind '"\e[1;5C" forward-word'
+
 # Snippet to create new tmux session
 function tns {
   tmux new-session -d -s $1 && [[ -n "$TMUX" ]] \
