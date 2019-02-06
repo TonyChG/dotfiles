@@ -4,27 +4,26 @@ call plug#begin('~/.vim/plugged')
 
 " Theme
 Plug 'itchyny/lightline.vim'
-Plug 'miyakogi/seiya.vim'
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug '~/.dotfiles/themes/mycolors', { 'as': 'mycolors' }
-
-" Code
 Plug 'pangloss/vim-javascript'
 Plug 'posva/vim-vue'
 Plug 'avakhov/vim-yaml'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvie/vim-flake8'
 Plug 'puppetlabs/puppet-syntax-vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Code
 Plug 'Valloric/YouCompleteMe'
+Plug 'junegunn/vim-easy-align'
 
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'mileszs/ack.vim'
 
 " Editing
-Plug 'mattn/emmet-vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'godlygeek/tabular'
 Plug 'tonychg/MagicTemplate'
@@ -81,6 +80,7 @@ set backspace=2
 
 if exists('+colorcolumn')
     set colorcolumn=80
+    highlight colorcolumn ctermbg=8
 endif
 
 filetype plugin on
@@ -165,13 +165,8 @@ nmap <F1> :echo<CR>
 imap <F1> <C-o>:echo<CR>
 
 " Plugins settings
-let g:seiya_auto_enable=1
-let g:user_emmet_leader_key='<C-d>'
-let g:tmux_navigator_save_on_switch = 2
 let g:lightline = { 'colorscheme': 'wombat'}
 let g:go_fmt_options = "-tabwidth=4"
-let vim_markdown_preview_github=1
-let vim_markdown_preview_browser='Google Chrome'
 {{- if eq .chezmoi.hostname "lethinkpad" }}
 let g:ycm_rust_src_path = '~/Documents/Clones/rust/src'
 {{- end}}
