@@ -86,9 +86,9 @@ set -g status-right \
 # Fedora 29
 set -g status-right \
 "| #(ps -e -o pmem,comm --sort pmem | tail -1\
- | awk '{printf(\"%%30s %%5s\", substr($2, 0, 30), $1)}') %%RAM \
+ | awk '{printf(\"%%s %%5s\", $2, $1)}') %%RAM \
  | #(ps -e -o pcpu,comm --sort pcpu | tail -1\
- | awk '{printf(\"%%30s %%5s\", substr($2, 0, 30), $1)}') %%CPU |"
+ | awk '{printf(\"%%s %%5s\", $2, $1)}') %%CPU |"
 {{- end }} 
 
 run '~/.tmux/plugins/tpm/tpm'

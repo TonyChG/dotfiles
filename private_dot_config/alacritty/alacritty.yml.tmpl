@@ -114,7 +114,11 @@ font:
     #style: Italic
 
   # Point size
+{{- if eq .chezmoi.hostname "lethinkpad" }}
+  size: 7.5
+{{- else }}
   size: 12.0
+{{- end }}
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
