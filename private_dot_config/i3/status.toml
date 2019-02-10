@@ -1,0 +1,60 @@
+# theme = "slick"
+icons = "awesome"
+[theme]
+name = "bad-wolf"
+
+[[block]]
+block = "disk_space"
+path = "/"
+alias = "ROOTFS"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+
+[[block]]
+block = "disk_space"
+path = "/home"
+alias = "HOMEDIR"
+info_type = "available"
+unit = "GB"
+interval = 20
+warning = 20.0
+alert = 10.0
+
+[[block]]
+block = "net"
+device = "wlp3s0"
+ssid = true
+ip = true
+speed_up = false
+graph_up = false
+interval = 5
+
+[[block]]
+block = "memory"
+display_type = "memory"
+format_mem = "{Mup}%"
+format_swap = "{SUp}%"
+
+[[block]]
+block = "cpu"
+interval = 1
+
+[[block]]
+block = "backlight"
+device = "intel_backlight"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "time"
+interval = 60
+format = "%a %d/%m %R"
+
+[[block]]
+block = "battery"
+interval = 10
+format = "{percentage}% {time}"

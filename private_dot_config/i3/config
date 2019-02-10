@@ -13,7 +13,7 @@ set $mod Mod4
 
 
 # Disable window title
-for_window [class="^.*"] border pixel 4
+for_window [class="^.*"] border pixel 5
 new_window 1pixel
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -171,12 +171,17 @@ bindsym $mod+r mode "resize"
 exec setxkbmap -option ctrl:nocaps
 exec nm-applet
 
+bindsym XF86MonBrightnessUp exec xbacklight +10
+bindsym XF86MonBrightnessDown exec xbacklight -10
+bindsym XF86AudioMute exec pacmd set-sink-volume 1 0
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -10%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +10%
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-        font pango:Inter UI 14
-
+        font pango:Ubuntu Mono, Font Awesome 14
+        status_command i3status-rs ~/.config/i3/status.toml
         colors {
             separator #666666
             background #424242
