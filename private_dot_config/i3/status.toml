@@ -24,15 +24,6 @@ warning = 20.0
 alert = 10.0
 
 [[block]]
-block = "net"
-device = "wlp3s0"
-ssid = true
-ip = true
-speed_up = false
-graph_up = false
-interval = 5
-
-[[block]]
 block = "memory"
 display_type = "memory"
 format_mem = "{Mup}%"
@@ -53,6 +44,15 @@ block = "sound"
 block = "time"
 interval = 60
 format = "%a %d/%m %R"
+
+[[block]]
+block = "net"
+device = "wlp3s0"
+ssid = true
+ip = false
+speed_up = false
+graph_up = false
+interval = 5
 
 [[block]]
 block = "battery"
