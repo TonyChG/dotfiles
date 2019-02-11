@@ -173,15 +173,16 @@ exec nm-applet
 
 bindsym XF86MonBrightnessUp exec xbacklight +10
 bindsym XF86MonBrightnessDown exec xbacklight -10
-bindsym XF86AudioMute exec pacmd set-sink-volume 1 0
-bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -10%
-bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +10%
+bindsym XF86AudioMute exec pacmd set-sink-volume $(pactl list | egrep -B 1 "State: RUNNING" | grep -i 'sink' | awk -F# '{print $2}') 0
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume $(pactl list | egrep -B 1 "State: RUNNING" | grep -i 'sink' | awk -F# '{print $2}') -10%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume $(pactl list | egrep -B 1 "State: RUNNING" | grep -i 'sink' | awk -F# '{print $2}') +10%
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        font pango:Ubuntu Mono, Font Awesome 14
+        font pango:Ubuntu Mono, Font Awesome 15
         status_command i3status-rs ~/.config/i3/status.toml
+
         colors {
             separator #666666
             background #424242
