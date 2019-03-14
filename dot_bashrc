@@ -3,6 +3,7 @@ export GOPATH=$HOME/Projects/go
 
 # Set $EDITOR
 export EDITOR="vim"
+export TERM="screen-256color"
 
 # Export $PATH
 export PATH=$PATH:$HOME/.npm/bin
@@ -14,9 +15,7 @@ export PATH=$PATH:$HOME/.ruby/bin
 export KUBE_EDITOR="${EDITOR}"
 
 # Fix Ctrl+s & Ctrl+r
-if ! [[ -z $TMUX ]]; then
-    stty -ixon
-fi
+stty -ixon
 
 # If not running interactively, don't do anything
 case $- in
@@ -39,7 +38,8 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 # Simple Prompt
-PS1='\u@\h:\W\$ '
+#PS1='\u@\h \W \$ '
+PS1="\[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\] \[\e[36m\]\W\[\e[m\]\[\e[36m\] \[\e[m\]\[\e[31m\]\\$\[\e[m\] "
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -74,6 +74,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+bind '"\e[1;5D" backward-word' 
+bind '"\e[1;5C" forward-word'
+
 # Snippet to create new tmux session
 function tns {
   tmux new-session -d -s $1 && [[ -n "$TMUX" ]] \
@@ -101,3 +104,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+complete -C /usr/local/bin/mc mc

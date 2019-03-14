@@ -12,7 +12,7 @@ Plug 'avakhov/vim-yaml'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvie/vim-flake8'
 Plug 'puppetlabs/puppet-syntax-vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'plasticboy/vim-markdown'
 
 " Code
 Plug 'Valloric/YouCompleteMe'
@@ -41,7 +41,6 @@ colorscheme challenger_deep
 " set shell=bash\ -l
 
 let $BASH_ENV = "~/.bash_aliases"
-
 let $FZF_DEFAULT_COMMAND='fd -H -t f -E venv -E target -E .git'
 
 highlight! WildMenu ctermfg=Yellow ctermbg=Black
@@ -52,9 +51,9 @@ let g:netrw_liststyle = 2
 " let g:netrw_keepdir = 0
 
 " Indent
-set autoindent
+" set autoindent
 set smartindent
-set expandtab
+" set expandtab
 set shiftwidth=4
 set softtabstop=4
 set laststatus=2
@@ -84,7 +83,7 @@ if exists('+colorcolumn')
 endif
 
 filetype plugin on
-filetype plugin indent on
+" filetype plugin indent on
 
 " KeyBindings
 let mapleader=","
@@ -167,9 +166,6 @@ imap <F1> <C-o>:echo<CR>
 " Plugins settings
 let g:lightline = { 'colorscheme': 'wombat'}
 let g:go_fmt_options = "-tabwidth=4"
-{{- if eq .chezmoi.hostname "lethinkpad" }}
-let g:ycm_rust_src_path = '~/Documents/Clones/rust/src'
-{{- end}}
 
 fun! s:autoFlake8()
     if &filetype == 'python'

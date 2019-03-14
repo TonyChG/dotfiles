@@ -47,7 +47,7 @@ format = "%a %d/%m %R"
 
 [[block]]
 block = "net"
-device = "wlp3s0"
+device = "wlo1"
 ssid = true
 ip = false
 speed_up = false
