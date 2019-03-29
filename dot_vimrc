@@ -12,7 +12,6 @@ Plug 'avakhov/vim-yaml'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvie/vim-flake8'
 Plug 'puppetlabs/puppet-syntax-vim'
-Plug 'plasticboy/vim-markdown'
 
 " Code
 Plug 'Valloric/YouCompleteMe'
@@ -147,8 +146,8 @@ cnoreabbrev AG Ack
 "     \ {'source': map(range(1, bufnr('$')), 'bufname(v:val)')}))
 
 " Tabs & whitespace & non-breaking spaces visible
-" exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-" set list
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
 
 " Markdown table
 au FileType markdown vmap <Bar><Bar> :EasyAlign*<Bar><Enter>
@@ -179,7 +178,7 @@ augroup vagrant
 augroup END
 
 " autocmd InsertLeave * write
-" autocmd BufWritePost * call s:autoFlake8()
+autocmd BufWritePost * call s:autoFlake8()
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
