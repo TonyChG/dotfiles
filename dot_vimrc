@@ -12,10 +12,12 @@ Plug 'avakhov/vim-yaml'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvie/vim-flake8'
 Plug 'puppetlabs/puppet-syntax-vim'
+Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
 
 " Code
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
+Plug 'Yggdroot/indentLine'
 
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -26,6 +28,8 @@ Plug 'mileszs/ack.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'godlygeek/tabular'
 Plug 'tonychg/MagicTemplate'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -45,8 +49,8 @@ let $FZF_DEFAULT_COMMAND='fd -H -t f -E venv -E target -E .git'
 highlight! WildMenu ctermfg=Yellow ctermbg=Black
 
 " Netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 2
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 2
 " let g:netrw_keepdir = 0
 
 " Indent
@@ -135,7 +139,12 @@ command! W w !sudo tee %
 cabbrev help tab help
 cabbrev h tab h
 
+command! -nargs=1 FF let i=1|let mm=findfile(<q-args>, '', -1)|for f in mm| echo i.':'.f|let i+=1 |endfor|let choice=input('FF: ')|exec 'e ' . mm[choice-1]
+
 let g:ackprg = 'ag --vimgrep --smart-case'
+let g:UltiSnipsExpandTrigger = "<f1>"
+let g:UltiSnipsJumpForwardTrigger="<c-x>"
+let g:UltiSnipsJumpBackwardTrigger="<c-c>"
 
 cnoreabbrev ag Ack
 cnoreabbrev aG Ack
@@ -155,6 +164,10 @@ au FileType markdown vmap <Bar><Bar> :EasyAlign*<Bar><Enter>
 " FZF
 nnoremap <C-f> :FZF<CR>
 nnoremap <C-b> :Buffers<CR>
+
+nnoremap gn :bn<cr>
+nnoremap gp :bp<cr>
+nnoremap gd :bd<cr>
 
 " Unbind F1 help
 nmap q: :echo<CR>
@@ -185,3 +198,4 @@ autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType puppet setlocal ts=2 sts=2 sw=2 expandtab
+" autocmd BufEnter * silent! lcd %:p:h

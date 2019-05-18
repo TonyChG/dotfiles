@@ -2,8 +2,9 @@
 export GOPATH=$HOME/Projects/go
 
 # Set $EDITOR
-export EDITOR="vim"
-export TERM="screen-256color"
+export EDITOR="nvim"
+export VISUAL="nvim"
+export TERM="xterm-256color"
 
 # Export $PATH
 export PATH=$PATH:$HOME/.npm/bin
@@ -13,6 +14,12 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.ruby/bin
 export KUBE_EDITOR="${EDITOR}"
+
+export NNN_OPENER=mimeopen
+export NNN_FALLBACK_OPENER=mimeopen
+export NNN_DE_FILE_MANAGER=polo-gtk
+
+export NNN_COPIER="$HOME/.config/nnn/copier.sh"
 
 # Fix Ctrl+s & Ctrl+r
 stty -ixon
