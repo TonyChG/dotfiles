@@ -13,8 +13,10 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'nvie/vim-flake8'
 Plug 'puppetlabs/puppet-syntax-vim'
 Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
+Plug 'crusoexia/vim-monokai'
 
 " Code
+Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
 Plug 'Yggdroot/indentLine'
@@ -22,7 +24,6 @@ Plug 'Yggdroot/indentLine'
 " Searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'mileszs/ack.vim'
 
 " Editing
 Plug 'tomtom/tcomment_vim'
@@ -30,6 +31,7 @@ Plug 'godlygeek/tabular'
 Plug 'tonychg/MagicTemplate'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 
@@ -37,14 +39,14 @@ call plug#end()
 syntax on
 set encoding=UTF-8
 " Customize
-colorscheme challenger_deep
+colorscheme monokai
 " colorscheme mycolors
 
 " set shellcmdflag=-ic
 " set shell=bash\ -l
 
 let $BASH_ENV = "~/.bash_aliases"
-let $FZF_DEFAULT_COMMAND='fd -H -t f -E venv -E target -E .git'
+let $FZF_DEFAULT_COMMAND='fd -H -t f -E node_modules -E venv -E target -E .git'
 
 highlight! WildMenu ctermfg=Yellow ctermbg=Black
 
@@ -146,11 +148,6 @@ let g:UltiSnipsExpandTrigger = "<f1>"
 let g:UltiSnipsJumpForwardTrigger="<c-x>"
 let g:UltiSnipsJumpBackwardTrigger="<c-c>"
 
-cnoreabbrev ag Ack
-cnoreabbrev aG Ack
-cnoreabbrev Ag Ack
-cnoreabbrev AG Ack
-
 " command! Buffers call fzf#run(fzf#wrap(
 "     \ {'source': map(range(1, bufnr('$')), 'bufname(v:val)')}))
 
@@ -174,9 +171,20 @@ nmap q: :echo<CR>
 imap q: :echo<CR>
 nmap <F1> :echo<CR>
 imap <F1> <C-o>:echo<CR>
+map <F9> :make<CR>
+map <F10> :make test<CR>
 
 " Plugins settings
-let g:lightline = { 'colorscheme': 'wombat'}
+let g:lightline = {
+	    \ 'colorscheme': 'wombat',
+	    \ 'active': {
+	    \   'left': [ [ 'mode', 'paste' ],
+	    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+	    \ },
+	    \ 'component_function': {
+	    \   'gitbranch': 'fugitive#head'
+	    \ },
+	    \ }
 let g:go_fmt_options = "-tabwidth=4"
 
 fun! s:autoFlake8()
@@ -193,7 +201,6 @@ augroup END
 " autocmd InsertLeave * write
 autocmd BufWritePost * call s:autoFlake8()
 au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
