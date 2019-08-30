@@ -2,12 +2,17 @@
 shopt -s expand_aliases
 
 # some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias lo='ls -ohg --full-time'
-alias l='ls -CF'
+alias ls='exa'
+alias ll='exa -alF'
+alias la='exa -a'
+alias lo='exa -lhg --time-style=full-iso'
+alias lg='exa -l -t modified --git'
+alias lt='exa -l -T --git'
 
-alias v="vim"
+alias v="fasd -f -e nvim"
+alias b="fasd -f -e bat"
+alias vd="fasd -d -e nvim"
+alias vim="nvim"
 alias vt="vagrant"
 
 # Workflow
