@@ -53,4 +53,4 @@ autocmd BufNewFile,BufRead Vagrantfile set filetype=ruby
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType puppet setlocal ts=2 sts=2 sw=2 expandtab
-" autocmd BufEnter * silent! lcd %:p:hype
+"v autocmd BufEnter * silent! lcd %:p:hype
