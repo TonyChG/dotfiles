@@ -40,9 +40,20 @@ set nocursorcolumn
 set nocursorline
 set synmaxcol=200
 
+" Enable plugin filetype
+filetype plugin on
+
 " Custom Keybindings
 nnoremap <silent><f2> :!cat ~/.config/helpers<CR>
-nnoremap <silent><C-c> :!ctags -R --languages=python --exclude=virtualenv<CR>
+" nnoremap <silent><C-c> :!ctags -R --languages=python --exclude=virtualenv<CR>
+
+set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git,.git/*,*.class,*/target/*,.idea/,*/__pycache__/*,*/node_modules/*
+
+cabbrev lvim
+      \ lvim /\<lt><C-R><C-W>\>/gj
+      \ *<C-R>=(expand("%:e")=="" ? "" : ".".expand("%:e"))<CR>
+      \ <Bar> lw
+      \ <C-Left><C-Left><C-Left>
 
 " Custom FileType
 " autocmd InsertLeave * write
