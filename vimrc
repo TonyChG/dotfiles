@@ -42,12 +42,29 @@ set synmaxcol=200
 
 " Enable plugin filetype
 filetype plugin on
+" cabbrev bdall :%bd|e#
 
 " Custom Keybindings
 nnoremap <silent><f2> :!cat ~/.config/helpers<CR>
 " nnoremap <silent><C-c> :!ctags -R --languages=python --exclude=virtualenv<CR>
 
-set wildignore=*.o,*.a,*.so,*.pyc,*.swp,.git,.git/*,*.class,*/target/*,.idea/,*/__pycache__/*,*/node_modules/*
+set wildignore=*.o,*.a,*.so,*.swp,*.class,.idea/,*/node_modules/*
+set wildignore+=*.pyc,*/__pycache__/*,venv/*,*/venv/*,__init__.py
+set wildignore+=.git,.git/*,
+
+function s:MkNonExDir(file, buf)
+    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
+        let dir=fnamemodify(a:file, ':h')
+        if !isdirectory(dir)
+            call mkdir(dir, 'p')
+        endif
+    endif
+endfunction
+
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
 
 cabbrev lvim
       \ lvim /\<lt><C-R><C-W>\>/gj
