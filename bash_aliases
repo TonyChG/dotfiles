@@ -19,6 +19,11 @@ workon() {
     source $VENV/bin/activate
 }
 
+gjson() {
+	jq -r '.[].url' <(googler --json $1)
+}
+
+
 alias ls='ls --color'
 alias ll='ls -alF'
 alias la='ls -a'
