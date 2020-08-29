@@ -20,7 +20,7 @@ workon() {
 }
 
 gjson() {
-	jq -r '.[].url' <(googler --json $1)
+	jq -r '.[].url' <(googler --json $*)
 }
 
 
