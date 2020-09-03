@@ -40,8 +40,8 @@ highlight Normal ctermbg=none guibg=none
 highlight NonText ctermbg=none guibg=none
 
 set nonumber
-set smartindent
-set autoindent
+" set smartindent
+" set autoindent
 set termguicolors
 set shiftwidth=4
 set softtabstop=4
@@ -88,16 +88,21 @@ function s:MkNonExDir(file, buf)
     endif
 endfunction
 
+augroup BWCCreateDir
+    autocmd!
+    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
+augroup END
+
 " let g:coc_filetype_map = {
-" 	\ 'yaml.ansible': 'yaml',
-" 	\ }
+"   \ 'yaml.ansible': 'yaml',
+"   \ }
 
 let g:lightline = {
-	    \'colorscheme': 'onedark',
-	    \ 'component_function': {
-	    \   'filename': 'LightlineFilename',
-	    \ },
-	    \ }
+        \'colorscheme': 'onedark',
+        \ 'component_function': {
+        \   'filename': 'LightlineFilename',
+        \ },
+        \ }
 
 function! LightlineFilename()
   return expand('%@%')
