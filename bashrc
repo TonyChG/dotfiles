@@ -98,6 +98,6 @@ if [ -f /usr/local/bin/mc ]; then
 fi
 
 # Alacritty completion
-if [ -f /usr/local/bin/alacritty ]; then
+if [ -f /usr/local/bin/alacritty ] && [ -f ~/.bash_completion.d/alacritty ]; then
     source ~/.bash_completion.d/alacritty
 fi

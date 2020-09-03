@@ -32,7 +32,13 @@ alias l.='ls -d .[^.]*'
 # Common aliases
 alias ssh="TERM=screen-256color ssh"
 alias zathura="firejail --net=none zathura --mode=fullscreen"
-alias fd="fdfind"
+
+if [[ "$(head -1 /etc/os-release | awk -F'=' '{print$NF}')" == 'Fedora' ]]; then
+    alias fd="fd"
+else
+    alias fd="fdfind"
+fi
+
 alias vi="nvim"
 alias vim="nvim"
 
